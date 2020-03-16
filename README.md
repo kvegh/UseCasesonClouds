@@ -15,9 +15,9 @@
 * Invite more people
 
 ### Reach out to: 
-Karoly Vegh (repo owner as of now): https://github.com/kvegh
-Twitter: @kvegh
-LinkedIn: https://www.linkedin.com/in/kvegh/
+* Karoly Vegh (repo owner as of now): https://github.com/kvegh
+* Twitter: @kvegh
+* LinkedIn: https://www.linkedin.com/in/kvegh/
  
  
 
