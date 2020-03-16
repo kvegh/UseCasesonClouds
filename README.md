@@ -8,9 +8,9 @@
 ### Project ideas are: 
 * Deploy a flexible amount of different VMs to azure on demand 
 * Demonstrate usecases on those: 
-** compliance automation
-** Security updates on a heterogeneous platform
-** SAP-Insights integration
+  * compliance automation
+  * Security updates on a heterogeneous platform
+  * SAP-Insights integration
 
 ### Reach out to: 
 * Karoly Vegh (repo owner as of now): https://github.com/kvegh
