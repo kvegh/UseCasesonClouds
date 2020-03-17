@@ -1,5 +1,5 @@
 # UseCasesonClouds
-## This is a collaborative repo to implement usecases on public clouds in an automated fashion, to build knowhow and demonstrate the power of automation
+## This is a collaborative repo to implement usecases on public clouds in an automated fashion, to build knowhow and demonstrate the power of automation on cloud usecases.
 
 ### Current parameters: 
 * Working platform as of March 2020: Microsoft Azure (planning to add more later) 
