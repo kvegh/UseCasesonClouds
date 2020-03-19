@@ -7,8 +7,11 @@
     azure_rm_virtualmachineimage_info: 
       location: westeurope
       publisher: RedHat
-      offer: RHEL
-      sku: "{{ release }}"
+      # offer: byos
+      offer: rhel-byos
+      # sku: rhel-lvm8
+      sku: rhel-lvm75
+      # sku: rhel-lvm74
       # version: 8.0.2019050711
     register: vm_results
 
