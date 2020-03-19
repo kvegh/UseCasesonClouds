@@ -5,23 +5,27 @@
    - /home/ansible/secvar/ssh_keys.yml
 
   tasks: 
-#  - name: setup real clients
-#    azure_rm_virtualmachine:
-#      resource_group: "{{ resourcegroup_name }}"
-#      name: "{{ vm_hostname }}-rhel8.1-{{ item }}"
-#      vm_size: Standard_A2
-#      admin_username: ansible
-#      ssh_password_enabled: false
-#      ssh_public_keys: 
-#      - path: /home/ansible/.ssh/authorized_keys
-#        key_data: "{{ automata_sshkey }}"
-#      image:
-#        publisher: RedHat
-#        offer: RHEL
-#        sku: 8.1
-#        version: 8.1.2020020415
-#      public_ip_allocation_method: Disabled
-#    loop: "{{ range(0, 1)|list }}" 
+  - name: setup real clients
+    azure_rm_virtualmachine:
+      resource_group: "{{ resourcegroup_name }}"
+      name: "{{ vm_hostname }}-rhel7.5-{{ item }}"
+      vm_size: Standard_A2
+      admin_username: ansible
+      ssh_password_enabled: false
+      ssh_public_keys: 
+      - path: /home/ansible/.ssh/authorized_keys
+        key_data: "{{ automata_sshkey }}"
+      image:
+        publisher: RedHat
+        offer: rhel-byos
+        sku: rhel-lvm75
+        version: 7.5.20190205
+      public_ip_allocation_method: Disabled
+      plan:
+        product: rhel-byos
+        publisher: redhat
+        name: rhel-lvm75
+    loop: "{{ range(0, 1)|list }}" 
    
   - name: setup real clients
     azure_rm_virtualmachine:
@@ -35,16 +39,20 @@
         key_data: "{{ automata_sshkey }}"
       image:
         publisher: RedHat
-        offer: RHEL
-        sku: 8
-        version: 8.0.2019050711
+        offer: rhel-byos
+        sku: rhel-lvm8
+        version: 8.0.20190620
       public_ip_allocation_method: Disabled
+      plan:
+        product: rhel-byos
+        publisher: redhat
+        name: rhel-lvm8
     loop: "{{ range(0, 1)|list }}" 
    
   - name: setup real clients
     azure_rm_virtualmachine:
       resource_group: "{{ resourcegroup_name }}"
-      name: "{{ vm_hostname }}-rhel7.7.0-{{ item }}"
+      name: "{{ vm_hostname }}-rhel7.4.0-{{ item }}"
       vm_size: Standard_A2
       admin_username: ansible
       ssh_password_enabled: false
@@ -53,27 +61,13 @@
         key_data: "{{ automata_sshkey }}"
       image:
         publisher: RedHat
-        offer: RHEL
-        sku: 7.7
-        version: 7.7.2019090316
+        offer: rhel-byos
+        sku: rhel-lvm74
+        version: 7.4.20180511
       public_ip_allocation_method: Disabled
+      plan:
+        product: rhel-byos
+        publisher: redhat
+        name: rhel-lvm74
     loop: "{{ range(0, 1)|list }}" 
-  
-#  - name: setup real clients
-#    azure_rm_virtualmachine:
-#      resource_group: "{{ resourcegroup_name }}"
-#      name: "{{ vm_hostname }}-rhel-7.7.1-{{ item }}"
-#      vm_size: Standard_A2
-#      admin_username: ansible
-#      ssh_password_enabled: false
-#      ssh_public_keys: 
-#      - path: /home/ansible/.ssh/authorized_keys
-#        key_data: "{{ automata_sshkey }}"
-#      image:
-#        publisher: RedHat
-#        offer: RHEL
-#        sku: 7.7
-#        version: 7.7.2020020415
-#      public_ip_allocation_method: Disabled
-#    loop: "{{ range(0, 1)|list }}" 
   

@@ -46,7 +46,11 @@
         key_data: "{{ automata_sshkey }}"
       image:
         publisher: RedHat
-        offer: RHEL
-        sku: 8.1
+        offer: rhel-byos
+        sku: rhel-lvm8
         version: latest
-    
+      plan:
+        product: rhel-byos
+        publisher: redhat
+        name: rhel-lvm8
+
