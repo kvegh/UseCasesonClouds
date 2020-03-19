@@ -1,0 +1,13 @@
+---
+- name: set up hetzner subscription
+  hosts: all
+  vars_files: 
+    rhsm_cred.yml
+
+  tasks: 
+  - name: setup subscription
+    redhat_subscription: 
+      state: present
+      username: "{{ rhsm_access_account }}"
+      password: "{{ rhsm_access_token }}"
+      auto_attach: true
