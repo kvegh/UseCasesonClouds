@@ -2,7 +2,7 @@
   hosts: localhost
   vars_files: 
 #    - /home/ansible/secvar/azure_cred.yml
-   - /home/ansible/secvar/ssh_keys.yml
+   - /opt/data/sec/ssh_keys.yml
 
   tasks: 
   - name: create resource groups
@@ -43,7 +43,9 @@
       ssh_password_enabled: false
       ssh_public_keys: 
       - path: /home/ansible/.ssh/authorized_keys
-        key_data: "{{ automata_sshkey }}"
+        key_data: "{{ automata_ansible_sshkey }}"
+      - path: /home/ansible/.ssh/authorized_keys
+        key_data: "{{ automata_kvegh_sshkey }}"
       image:
         publisher: RedHat
         offer: rhel-byos
