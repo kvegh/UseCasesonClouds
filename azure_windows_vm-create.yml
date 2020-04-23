@@ -1,0 +1,90 @@
+---
+- hosts: localhost
+  connection: local
+
+  vars_prompt:
+          - name: password
+            prompt: "Admin password for your virtual machine:"
+
+           
+
+            tasks:            
+
+- name: Create a resource group
+  azure_rm_resourcegroup:
+          name: Windoof
+          location: westeurope
+
+
+- name: Create a virtual network
+  azure_rm_virtualnetwork:
+          resource_group: Windoof
+          name: Windoof-network
+          address_prefixes: "10.0.0.0/16"
+
+
+- name: Add a subnet
+  azure_rm_subnet:
+          resource_group: Windoof
+          name: Windoof-subnet
+          address_prefix: "10.0.1.0/24"
+          virtual_network: Windoof-network
+
+
+- name: Create a public IP
+  azure_rm_publicaddress:
+          resource_group: Windoof
+          allocation_method: Static
+          name: Windoof-public-ip
+
+
+- name: Create a network security group
+  azure_rm_securitygroup:
+          resource_group: Windoof
+          name: Windoof-securitygroup
+          rules:
+              - name: 'allow WinRM'
+                protocol: Tcp
+                destination_port_range:
+                        - 5985
+                        - 5986
+
+              - name: 'allow_rdp'
+                protocol: Tcp
+                destination_port_range: 3389
+                access: allow
+                priority: 1001
+                direction: Inbound
+
+
+
+- name: Create a network interface
+azure_rm_networkinterface:
+        name: Windoof-nic
+        resource_group: Windoof
+        virtual_network: Windoof-network
+        subnet_name: Windoof-subnet
+        security_group: Windoof-securitygroup
+        ip_configurations:
+                - name: default
+                  public_ip_address_name: Windoof-public-ip
+                  primary: True
+
+
+                  
+- name: Create Windoof-VM
+  azure_rm_virtualmachine:
+          resourcegroup: Windoof
+          name: Windows-Server-2019
+          vm_size: Standard_DS1_v2
+          admin_username: sysadmin
+          admin_password: "{{ password }}"
+          network_interfaces: Windoof-nic
+          os_type: Windows
+          image:
+                  offer: WindowsServer
+                  publisher: MicrosoftWindowsServer
+                  sku: 2019-Datacenter
+                  version: latest
+
+
