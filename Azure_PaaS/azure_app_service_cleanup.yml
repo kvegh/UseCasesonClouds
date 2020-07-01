@@ -1,0 +1,27 @@
+# uses a service principal set up in azure portal
+# credentials defined in dev at $HOME/.azure/credentials
+#
+
+# Cleanup all resources created 
+#
+- name: Manage Azure App Service from Ansible
+  hosts: localhost
+
+  tasks: 
+
+  - name: Remove Web App
+    azure_rm_webapp:
+      resource_group: pwe-ansible-test
+      name: pwe-ansible-test
+      state: absent
+
+  - name: Remove App Service Plan
+    azure_rm_appserviceplan:
+      name: pwe-ansible-linux
+      resource_group: pwe-ansible-test
+      state: absent
+
+  - name: Remove Resource Group
+    azure_rm_resourcegroup:
+      name: pwe-ansible-test
+      state: absent
