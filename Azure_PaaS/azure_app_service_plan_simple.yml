@@ -1,0 +1,25 @@
+# uses a service principal set up in azure portal
+# credentials defined in dev at $HOME/.azure/credentials
+#
+
+# Create Resource Group and Azure App Service Plan
+#
+
+- name: Manage Azure App Service from Ansible
+  hosts: localhost
+
+  tasks: 
+  - name: create resource group
+    azure_rm_resourcegroup:
+      name: pwe-ansible-test
+      location: westeurope 
+
+  - name: Create new App Service Plan
+    azure_rm_appserviceplan:
+      name: pwe-ansible-linux
+      resource_group: pwe-ansible-test
+      location: westeurope
+      sku: S1
+      is_linux: true
+      number_of_workers: 1
+
